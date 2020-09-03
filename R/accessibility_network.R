@@ -8,7 +8,9 @@
 #'
 #' @param species (character) Could be "hg19", "hg38", "mm9" or "mm10".
 #'
-#' @param upstream @param downstream (numeric) Promoter region from TSS for target identificaton
+#' @param upstream (numeric) Promoter region from TSS for target identificaton.
+#' 
+#' @param downstream (numeric) Promoter region from TSS for target identificaton.
 #'
 #' @param p.cutoff (numeric) P-value cutoff for motifs searching within peaks for TF identificaton.
 #'

@@ -8,13 +8,19 @@
 #'
 #' @param ... (igraph) Supporter graphs with pagerank and name as vertex attributes.
 #'
-#' @param beta/gamma (numeric) Parameters for adjusting supporter graph PageRank values.
+#' @param beta (numeric) Parameters for adjusting supporter graph PageRank values.
 #' For the same nodes, PageRank values from different supporter graphs will first be multiplicated.
 #' The products will then be exponentiate by beta and gamma,
 #' as outgoing edge weights and personalizations of the base graph.
 #' Four special multiplex PageRank forms are defined by varying (beta, gamma),
 #' including additive (0, 1), multiplicative (1, 0), combined (1, 1) and neutral (0, 0).
-#'
+#' 
+#' @param gamma (numeric) Parameters for adjusting supporter graph PageRank values.
+#' For the same nodes, PageRank values from different supporter graphs will first be multiplicated.
+#' The products will then be exponentiate by beta and gamma,
+#' as outgoing edge weights and personalizations of the base graph.
+#' Four special multiplex PageRank forms are defined by varying (beta, gamma),
+#' including additive (0, 1), multiplicative (1, 0), combined (1, 1) and neutral (0, 0).
 #' @param damping (numeric) Damping factor.
 #'
 #' @return (numeric) Multiplex PageRank values.

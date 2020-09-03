@@ -10,7 +10,9 @@
 #'
 #' @param range (numeric) Search region defined from "Position1" and "Position2".
 #'
-#' @param upstream @param downstream (numeric) Promoter region defined by distance from TSS.
+#' @param upstream (numeric) Promoter region defined by distance from TSS.
+#' 
+#' @param downstream (numeric) Promoter region defined by distance from TSS.
 #'
 #' @param p.cutoff (numeric) P-value cutoff for motifs searching within peaks for TF identificaton.
 #'

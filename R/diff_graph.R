@@ -45,7 +45,7 @@ diff_graph <- function(graph1, graph2){
                reg=colnames(graph)[graph[i, ] != 0],
                moi=graph[i, graph[i, ] != 0])
   }, graph=graph))
-  graph <- graph_from_data_frame(graph, directed=T) %>%
-    set_edge_attr(name="moi", value=graph$moi)
+  graph <- graph_from_data_frame(graph, directed=T)
+  graph <- set_edge_attr(graph=graph, name="moi", value=graph$moi)
   graph <- set_vertex_attr(graph=graph, name="pagerank", value=page_rank(graph)$vector)
   return(graph)}

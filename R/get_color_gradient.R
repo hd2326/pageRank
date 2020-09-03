@@ -3,7 +3,10 @@
 #' Generate color gradient for, e.g. gene expression.
 #'
 #' @param x (numeric) Vector based on which color gradient is generated.
-#'
+#' 
+#' @param col (character) Color vector.
+#' 
+#' @param breaks (numeric) A set of breakpoints for the colors. Must be the same length of col.
 #' @return (character) Colors.
 #'
 #' @examples

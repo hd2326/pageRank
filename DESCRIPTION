@@ -1,6 +1,6 @@
 Package: pageRank
 Title: Temporal and Multiplex PageRank for Gene Regulatory Network Analysis
-Version: 0.99.2
+Version: 0.99.3
 Authors@R: person("Hongxu", "Ding", role=c("aut", "cre", "ctb", "cph"), email="hd2326@columbia.edu")
 Description: Implemented temporal PageRank analysis as defined by Rozenshtein and Gionis, and multiplex PageRank as defined by Halu et al., as well as the application in gene regulatory network analysis.
 Depends: R (>= 3.4.0)
