@@ -17,6 +17,8 @@
 #' @examples
 #' s_mat <- c_mat <- n_mat <- matrix(1:12, 3, 4, dimnames = list(1:3, 1:4))
 #' bubble_plot(s_mat, c_mat, n_mat, breaks = seq(1, 12, length.out = 100), main = "Test")
+#' 
+#' @import graphics
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)
 #'

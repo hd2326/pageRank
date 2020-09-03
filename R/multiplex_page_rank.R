@@ -21,6 +21,7 @@
 #' as outgoing edge weights and personalizations of the base graph.
 #' Four special multiplex PageRank forms are defined by varying (beta, gamma),
 #' including additive (0, 1), multiplicative (1, 0), combined (1, 1) and neutral (0, 0).
+#' 
 #' @param damping (numeric) Damping factor.
 #'
 #' @return (numeric) Multiplex PageRank values.

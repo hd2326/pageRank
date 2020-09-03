@@ -7,12 +7,15 @@
 #' @param col (character) Color vector.
 #' 
 #' @param breaks (numeric) A set of breakpoints for the colors. Must be the same length of col.
+#' 
 #' @return (character) Colors.
 #'
 #' @examples
 #' get_color_gradient(-2:2)
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)
+#' 
+#' @import grDevices
 #'
 #' @export
 
