@@ -15,7 +15,6 @@
 #' @return (ecdf) ECDF of null distribution.
 #'
 #' @examples
-#' library(pageRank)
 #' library(bcellViper)
 #' data(bcellViper)
 #' dset <- exprs(dset)

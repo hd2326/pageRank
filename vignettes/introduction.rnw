@@ -79,11 +79,11 @@ We applied \Rfunction{diff_graph()} to calculate temporal PageRank. This is a si
 library(pageRank)
 set.seed(1)
 graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph1)$name <- 1:100
+igraph::V(graph1)$name <- 1:100
 #the 1st graph with name as vertex attributes
 set.seed(2)
 graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph2)$name <- 1:100
+igraph::V(graph2)$name <- 1:100
 #the 2nd graph with name as vertex attributes
 diff_graph(graph1, graph2)
 @
@@ -98,13 +98,13 @@ We applied \Rfunction{multiplex_page_rank()} to calculate multiplex PageRank fol
 library(pageRank)
 set.seed(1)
 graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph1)$name <- 1:100
-V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
+igraph::V(graph1)$name <- 1:100
+igraph::V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
 #the base graph with pagerank and name as vertex attributes.
 set.seed(2)
 graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph2)$name <- 1:100
-V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
+igraph::V(graph2)$name <- 1:100
+igraph::V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
 #the supplemental graph with pagerank and name as vertex attributes.
 multiplex_page_rank(graph1, graph2)
 @
@@ -119,8 +119,8 @@ The \Rfunction{clean_graph()} can remove nodes by residing subgraph sizes, verte
 library(pageRank)
 set.seed(1)
 graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph)$name <- 1:100
-V(graph)$pagerank <- igraph::page_rank(graph)$vector
+igraph::V(graph)$name <- 1:100
+igraph::V(graph)$pagerank <- igraph::page_rank(graph)$vector
 #the graph to be cleaned, with pagerank and name as vertex attributes.
 clean_graph(graph, size=5)
 @
@@ -131,8 +131,8 @@ The \Rfunction{adjust_graph()} can re-calculate PageRank with updated damping fa
 library(pageRank)
 set.seed(1)
 graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph)$name <- 1:100
-V(graph)$pagerank <- igraph::page_rank(graph, damping=0.85)$vector
+igraph::V(graph)$name <- 1:100
+igraph::V(graph)$pagerank <- igraph::page_rank(graph, damping=0.85)$vector
 #the graph to be adjusted, with pagerank and name as vertex attributes.
 adjust_graph(graph, damping=0.1)
 @

@@ -27,15 +27,15 @@
 #' @return (numeric) Multiplex PageRank values.
 #'
 #' @examples
-#' library(pageRank)
+#' library(igraph)
 #' set.seed(1)
 #' graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-#' V(graph1)$name <- 1:100
-#' V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
+#' igraph::V(graph1)$name <- 1:100
+#' igraph::V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
 #' set.seed(2)
 #' graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-#' V(graph2)$name <- 1:100
-#' V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
+#' igraph::V(graph2)$name <- 1:100
+#' igraph::V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
 #' multiplex_page_rank(graph1, graph2)
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)

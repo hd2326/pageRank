@@ -9,7 +9,6 @@
 #' @return (matrix) Time-wise average gene expression.
 #'
 #' @examples
-#' library(pageRank)
 #' expmat <- matrix(rnorm(90), 10, 9, dimnames=list(LETTERS[1:10], 1:9))
 #' time <- c(rep("T1", 3), rep("T2", 3), rep("T3", 3))
 #' time_expmat(time, expmat)

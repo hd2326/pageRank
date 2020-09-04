@@ -11,7 +11,6 @@
 #' @return (character) Colors.
 #'
 #' @examples
-#' library(pageRank)
 #' get_color_gradient(-2:2)
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)

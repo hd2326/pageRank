@@ -42,7 +42,6 @@
 #' pfm <- pfm[unlist(lapply(pfm, function(x) x@name)) %in% regulators]
 #' #get regulator position frequency matrix (PFM) list
 #' 
-#' library(pageRank)
 #' library(BSgenome.Hsapiens.UCSC.hg19)
 #' conformation_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
 #'

@@ -13,13 +13,13 @@
 #' @return (igraph) Network graph1-graph2 with "moi (mode of interaction)" and "pagerank" as edge and vertex attributes.
 #'
 #' @examples
-#' library(pageRank)
+#' library(igraph)
 #' set.seed(1)
 #' graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-#' V(graph1)$name <- 1:100
+#' igraph::V(graph1)$name <- 1:100
 #' set.seed(2)
 #' graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-#' V(graph2)$name <- 1:100
+#' igraph::V(graph2)$name <- 1:100
 #' diff_graph(graph1, graph2)
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)

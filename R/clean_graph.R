@@ -13,11 +13,11 @@
 #' @return (igraph) Network updated "pagerank" as vertex attribute.
 #'
 #' @examples
-#' library(pageRank)
+#' library(igraph)
 #' set.seed(1)
 #' graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-#' V(graph)$name <- 1:100
-#' V(graph)$pagerank <- igraph::page_rank(graph)$vector
+#' igraph::V(graph)$name <- 1:100
+#' igraph::V(graph)$pagerank <- igraph::page_rank(graph)$vector
 #' clean_graph(graph, size=5)
 
 #' @author DING, HONGXU (hd2326@columbia.edu)
