@@ -15,14 +15,14 @@
 
 PXPY <- function(px, combinations){
   pb <- txtProgressBar(min = 1, max = length(combinations), style = 3)
-  table <- lapply(1:length(combinations), function(i, combinations, px, pb){
+  table <- lapply(seq_len(length(combinations)), function(i, combinations, px, pb){
     setTxtProgressBar(pb, i)
     x <- unlist(lapply(strsplit(combinations[i], split = "_"), function(x) x[1]))
     y <- unlist(lapply(strsplit(combinations[i], split = "_"), function(x) x[2]))
     pxx <- px[x, ]
     pxy <- px[y, ]
     table <- outer(pxx, pxy, "*")
-    dimnames(table) <- list(paste(x, 1:length(pxx), sep = "_"), paste(y, 1:length(pxy), sep = "_"))
+    dimnames(table) <- list(paste(x, seq_len(length(pxx)), sep = "_"), paste(y, seq_len(length(pxy)), sep = "_"))
     table}, combinations=combinations, px=px, pb=pb)
   names(table) <- combinations
   return(table)}

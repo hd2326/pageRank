@@ -21,7 +21,7 @@
 #' @examples
 #' table <- data.frame(Chr1=c("chr1", "chr1"), Position1=c(569265, 713603), Strand1=c("+", "+"),
 #'                     Chr2=c("chr4", "chr1"), Position2=c(206628, 715110), Strand2=c("+", "-"),
-#'                     row.names=c("A", "B"), stringsAsFactors=F)
+#'                     row.names=c("A", "B"), stringsAsFactors=FALSE)
 #' regulators=c("FOXF2", "MZF1")
 #' #peaks and regulators to be analyzed
 #' 
@@ -56,9 +56,9 @@
 
 conformation_network <- function(table, promoter, pfm, genome, range=500, p.cutoff=5e-05, w=7){
   table1 <- makeGRangesFromDataFrame(data.frame(Chr=table$Chr1, Start=table$Position1-range, End=table$Position1+range, Strand=table$Strand1,
-                                                row.names=rownames(table), stringsAsFactors=F))
+                                                row.names=rownames(table), stringsAsFactors=FALSE))
   table2 <- makeGRangesFromDataFrame(data.frame(Chr=table$Chr2, Start=table$Position2-range, End=table$Position2+range, Strand=table$Strand2,
-                                                row.names=rownames(table), stringsAsFactors=F))
+                                                row.names=rownames(table), stringsAsFactors=FALSE))
   #convert record table to GRanges, "1" and "2" indicate the"read1" and "read2" can both be in TF and target regions.
   target1 <- as.data.frame(findOverlaps(table1, promoter))
   target1$subjectHits <- names(promoter)[target1$subjectHits]
@@ -74,9 +74,9 @@ conformation_network <- function(table, promoter, pfm, genome, range=500, p.cuto
   colnames(reg1) <- colnames(reg2) <- structure(unlist(lapply(pfm, function(x) x@name)), names=NULL)
   #map between ranges and regulators by motif searching
   regul1 <- lapply(unique(target1$queryHits), function(x, target1, reg2){
-    expand.grid(target=target1$subjectHits[target1$queryHits == x], reg=colnames(reg2)[reg2[x, ]], stringsAsFactors=F)}, target1=target1, reg2=reg2)
+    expand.grid(target=target1$subjectHits[target1$queryHits == x], reg=colnames(reg2)[reg2[x, ]], stringsAsFactors=FALSE)}, target1=target1, reg2=reg2)
   regul2 <- lapply(unique(target2$queryHits), function(x, target2, reg1){
-    expand.grid(target=target2$subjectHits[target2$queryHits == x], reg=colnames(reg1)[reg1[x, ]], stringsAsFactors=F)}, target2=target2, reg1=reg1)
+    expand.grid(target=target2$subjectHits[target2$queryHits == x], reg=colnames(reg1)[reg1[x, ]], stringsAsFactors=FALSE)}, target2=target2, reg1=reg1)
   regul <- rbind(do.call(rbind, regul1), do.call(rbind, regul2))
   regul <- regul[!duplicated(paste(regul$reg, regul$target, sep="-")), ]
   #regulator-target network

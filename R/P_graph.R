@@ -23,7 +23,7 @@
 #' net <- do.call(rbind, lapply(1:10, function(i, regulon){
 #'   data.frame(reg=rep(names(regulon)[i], 10),
 #'              target=names(regulon[[i]][[1]])[1:10],
-#'              stringsAsFactors = F)}, regulon=regulon))
+#'              stringsAsFactors = FALSE)}, regulon=regulon))
 #' P_graph(dset, net, null=NULL, threshold=0.05)
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)
@@ -45,7 +45,7 @@ P_graph <- function(expmat, net, sep=5, method=c("difference", "mi"), null=NULL,
   if (is.null(null)) null <- ecdf(unlist(dist))
   pvalue <- structure(1-null(unlist(dist)), names=names(dist))
   graph <- do.call(rbind, lapply(names(pvalue)[pvalue <= threshold], function(x) unlist(strsplit(x, split = "_"))))
-  graph <- graph_from_data_frame(graph[, 2:1], directed=T)
+  graph <- graph_from_data_frame(graph[, 2:1], directed=TRUE)
   graph <- set_edge_attr(graph=graph, name="pvalue", value=pvalue[pvalue <= threshold])
   graph <- set_edge_attr(graph=graph, name="direction", value=net$direction[pvalue <= threshold])
   graph <- set_vertex_attr(graph=graph, name="pagerank", value=page_rank(graph)$vector)

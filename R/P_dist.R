@@ -17,7 +17,7 @@
 
 P_dist <- function(pxy, pxpy, method=c("difference", "mi")){
   pb <- txtProgressBar(min = 1, max = length(pxy), style = 3)
-  dist <- lapply(1:length(pxy), function(i, pxy, pxpy, method, pb){
+  dist <- lapply(seq_len(length(pxy)), function(i, pxy, pxpy, method, pb){
     setTxtProgressBar(pb, i)
     if (method == "difference") dist <- pxy[[i]]-pxpy[[i]]
     else if (method == "mi") dist <- pxy[[i]]*log2(pxy[[i]]/pxpy[[i]])

@@ -19,7 +19,7 @@
 #' @examples
 #' 
 #' table <- data.frame(Chr=c("chr1", "chr1"), Start=c(713689, 856337), End=c(714685, 862152),
-#'                     row.names=c("A", "B"), stringsAsFactors=F)
+#'                     row.names=c("A", "B"), stringsAsFactors=FALSE)
 #' regulators=c("FOXF2", "MZF1")
 #' #peaks and regulators to be analyzed
 #' 
@@ -65,6 +65,6 @@ accessibility_network <- function(table, promoters, pfm, genome, p.cutoff=5e-05,
   colnames(reg) <- structure(unlist(lapply(pfm, function(x) x@name)), names=NULL)
   #map between peaks and pfms by motif searching
   regul <- do.call(rbind, lapply(unique(target$queryHits), function(x, target, reg){
-    expand.grid(target=target$subjectHits[target$queryHits == x], reg=colnames(reg)[reg[x, ]], stringsAsFactors=F)}, target=target, reg=reg))
+    expand.grid(target=target$subjectHits[target$queryHits == x], reg=colnames(reg)[reg[x, ]], stringsAsFactors=FALSE)}, target=target, reg=reg))
   #regulator-target network
   return(regul)}

@@ -15,5 +15,5 @@
 gene_bin <- function(genes, expmat, sep=5){
   expmat <- expmat[intersect(genes, rownames(expmat)), ]
   table <- t(apply(expmat, 1, function(x, sep) seq(min(x), max(x), length.out = (sep+1)), sep=sep))
-  colnames(table) <- paste("bin", 1:(sep+1), sep = "_")
+  colnames(table) <- paste("bin", seq_len(sep+1), sep = "_")
   return(table)}

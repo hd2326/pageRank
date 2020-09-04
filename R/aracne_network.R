@@ -16,9 +16,9 @@
 #' @export
 
 aracne_network <- function(regulon){
-  regulon <- lapply(1:length(regulon), function(i, regulon) data.frame(reg=rep(names(regulon)[i], length(regulon[[i]]$tfmode)),
-                                                                       target=names(regulon[[i]]$tfmode),
-                                                                       direction=as.integer(regulon[[i]]$tfmode > 0),
-                                                                       stringsAsFactors=F), regulon=regulon)
+  regulon <- lapply(seq_len(length(regulon)), function(i, regulon) data.frame(reg=rep(names(regulon)[i], length(regulon[[i]]$tfmode)),
+                                                                              target=names(regulon[[i]]$tfmode),
+                                                                              direction=as.integer(regulon[[i]]$tfmode > 0),
+                                                                              stringsAsFactors=FALSE), regulon=regulon)
   regulon <- do.call(rbind, regulon)
   return(regulon)}

@@ -21,7 +21,7 @@
 #' net <- do.call(rbind, lapply(1:10, function(i, regulon){
 #'   data.frame(reg=rep(names(regulon)[i], 10),
 #'              target=names(regulon[[i]][[1]])[1:10],
-#'              stringsAsFactors = F)}, regulon=regulon))
+#'              stringsAsFactors = FALSE)}, regulon=regulon))
 #' P_null(dset, net, n=100)
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)
@@ -31,8 +31,8 @@
 #' @export
 
 P_null <- function(expmat, net, n=10000, sep=5, method=c("difference", "mi")){
-  net <- data.frame(reg=sample(unique(net$reg), size=n, replace=T),
-                    target=sample(unique(net$target), size=n, replace=T), stringsAsFactors=F)
+  net <- data.frame(reg=sample(unique(net$reg), size=n, replace=TRUE),
+                    target=sample(unique(net$target), size=n, replace=TRUE), stringsAsFactors=FALSE)
   bin <- gene_bin(genes=union(net$reg, net$target), expmat=expmat, sep=sep)
   px <- PX(expmat=expmat, bin=bin)
   pxy <- PXY(expmat=expmat, bin=bin, x=net$reg, y=net$target)

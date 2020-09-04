@@ -29,11 +29,11 @@
 #' @examples
 #' library(igraph)
 #' set.seed(1)
-#' graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = T)
+#' graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 #' V(graph1)$name <- 1:100
 #' V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
 #' set.seed(2)
-#' graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = T)
+#' graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 #' V(graph2)$name <- 1:100
 #' V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
 #' multiplex_page_rank(graph1, graph2)
@@ -65,5 +65,5 @@ multiplex_page_rank <- function (graph, ..., beta=1, gamma=1, damping=0.85){
   weights[weights == 0] <- min(weights[weights > 0])
   weights <- weights^beta
   #weights for multiplex pagerank as in halu et al.
-  pagerank <- page_rank(graph, directed=T, damping=damping, personalized=personalized, weights=weights)$vector
+  pagerank <- page_rank(graph, directed=TRUE, damping=damping, personalized=personalized, weights=weights)$vector
   return(pagerank)}

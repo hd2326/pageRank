@@ -1,15 +1,15 @@
 Package: pageRank
 Title: Temporal and Multiplex PageRank for Gene Regulatory Network Analysis
-Version: 0.99.5
+Version: 0.99.6
 Authors@R: person("Hongxu", "Ding", role=c("aut", "cre", "ctb", "cph"), email="hd2326@columbia.edu")
-Description: Implemented temporal PageRank analysis as defined by Rozenshtein and Gionis, and multiplex PageRank as defined by Halu et al., as well as the application in gene regulatory network analysis.
-Depends: R (>= 3.4.0)
+Description: Implemented temporal PageRank analysis as defined by Rozenshtein and Gionis. Implemented multiplex PageRank as defined by Halu et al.. Applied temporal and multiplex PageRank in gene regulatory network analysis.
+Depends: R (>= 4.0)
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports: GenomicRanges, igraph, motifmatchr, stats, utils, grDevices, graphics
 Suggests: bcellViper, BSgenome.Hsapiens.UCSC.hg19, BSgenome.Hsapiens.UCSC.hg38, BSgenome.Mmusculus.UCSC.mm10, BSgenome.Mmusculus.UCSC.mm9, JASPAR2018, TxDb.Hsapiens.UCSC.hg19.knownGene, TxDb.Hsapiens.UCSC.hg38.knownGene, TxDb.Mmusculus.UCSC.mm10.knownGene, TxDb.Mmusculus.UCSC.mm9.knownGene, org.Hs.eg.db, org.Mm.eg.db, TFBSTools, GenomicFeatures, annotate
-biocViews: StatisticalMethod
+biocViews: StatisticalMethod, GeneTarget, Network
 URL: https://github.com/hd2326/pageRank
 BugReports: https://github.com/hd2326/pageRank/issues
 RoxygenNote: 6.1.99.9001
