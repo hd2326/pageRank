@@ -17,6 +17,7 @@
 #' @return (igraph) Network graph with "pvalue" and "direction", and "pagerank" as edge/vertex attributes.
 #'
 #' @examples
+#' library(pageRank)
 #' library(bcellViper)
 #' data(bcellViper)
 #' dset <- exprs(dset)

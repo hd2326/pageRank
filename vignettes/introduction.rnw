@@ -76,7 +76,7 @@ BiocManager::install("bcellViper")
 We applied \Rfunction{diff_graph()} to calculate temporal PageRank. This is a simplified version of temporal PageRank described by [1] by only analyzing temporally adjacent graph pairs.
 
 <<tPR>>=
-library(igraph)
+library(pageRank)
 set.seed(1)
 graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph1)$name <- 1:100
@@ -95,7 +95,7 @@ diff_graph(graph1, graph2)
 We applied \Rfunction{multiplex_page_rank()} to calculate multiplex PageRank following defination by [2].
 
 <<mPR>>=
-library(igraph)
+library(pageRank)
 set.seed(1)
 graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph1)$name <- 1:100
@@ -116,7 +116,7 @@ multiplex_page_rank(graph1, graph2)
 The \Rfunction{clean_graph()} can remove nodes by residing subgraph sizes, vertex names and PageRank values. We thus can adjust graphs for PageRank calculation.
 
 <<clean_graph>>=
-library(igraph)
+library(pageRank)
 set.seed(1)
 graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph)$name <- 1:100
@@ -128,7 +128,7 @@ clean_graph(graph, size=5)
 The \Rfunction{adjust_graph()} can re-calculate PageRank with updated damping factor, personalized vector and edge weights.
 
 <<adjust_graph>>=
-library(igraph)
+library(pageRank)
 set.seed(1)
 graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph)$name <- 1:100
@@ -147,6 +147,7 @@ The \Rfunction{aracne_network()} can re-format ARACNe network in regulon object 
 
 <<aracne_network>>=
 library(bcellViper)
+library(pageRank)
 data(bcellViper)
 aracne_network(regulon[1:10])
 @
@@ -154,6 +155,7 @@ aracne_network(regulon[1:10])
 The \Rfunction{accessibility_network()} can build network from accessibility, e.g. ATAC-Seq peaks.
 
 <<accessibility_network>>=
+library(pageRank)
 table <- data.frame(Chr=c("chr1", "chr1"), Start=c(713689, 856337), End=c(714685, 862152),
                     row.names=c("A", "B"), stringsAsFactors=FALSE)
 regulators=c("FOXF2", "MZF1")
@@ -176,6 +178,7 @@ pfm <- getMatrixSet(JASPAR2018, list(species="Homo sapiens"))
 pfm <- pfm[unlist(lapply(pfm, function(x) x@name)) %in% regulators]
 #get regulator position frequency matrix (PFM) list
 
+library(pageRank)
 library(BSgenome.Hsapiens.UCSC.hg19)
 accessibility_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
 @
@@ -206,6 +209,7 @@ pfm <- getMatrixSet(JASPAR2018, list(species="Homo sapiens"))
 pfm <- pfm[unlist(lapply(pfm, function(x) x@name)) %in% regulators]
 #get regulator position frequency matrix (PFM) list
 
+library(pageRank)
 library(BSgenome.Hsapiens.UCSC.hg19)
 conformation_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
 @
@@ -217,6 +221,7 @@ conformation_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
 The \Rfunction{P_graph()} can filter GRNs by quantifying joint and margin probability distributions of regulator-target pairs. Statistically significant non-random regulator-target pairs will be kept.
 
 <<P_graph>>=
+library(pageRank)
 library(bcellViper)
 data(bcellViper)
 dset <- exprs(dset)

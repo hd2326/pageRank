@@ -7,6 +7,7 @@
 #' @return (data.frame) Network, with "reg", "target" and "direction" in column name. For direction, 1/0 denotes positive/negative regulation.
 #'
 #' @examples
+#' library(pageRank)
 #' library(bcellViper)
 #' data(bcellViper)
 #' aracne_network(regulon[1:10])
