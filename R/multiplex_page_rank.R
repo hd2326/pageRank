@@ -4,7 +4,7 @@
 #'
 #' @references Halu, Arda, et al. "Multiplex pagerank." PloS one 8.10 (2013).
 #'
-#' @param graph (igraph) The base graph with pagerank and name as vertex attributes
+#' @param graph (igraph) The base graph with pagerank and name as vertex attributes.
 #'
 #' @param ... (igraph) Supporter graphs with pagerank and name as vertex attributes.
 #'
