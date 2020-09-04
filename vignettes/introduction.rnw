@@ -28,8 +28,8 @@
 \newcommand{\Rmethod}[1]{{\texttt{#1}}}
 \newcommand{\Rfunarg}[1]{{\texttt{#1}}}
 
-\title{Introduction to pageRank package}
-\author{Hongxu Ding\\Department of Biomolecular Engineering and Genomics Institute, UCSC, Santa Cruz, CA, USA}
+\title{Introduction to the pageRank Package}
+\author{Hongxu Ding\\Department of Biomolecular Engineering and Genomics Institute,\\University of California, Santa Cruz, Santa Cruz, CA, USA}
 \date{\today}
 
 \begin{document}
@@ -39,6 +39,10 @@
 
 %------------------------------------------------------------
 \section{Introduction}
+%------------------------------------------------------------ 
+
+%------------------------------------------------------------
+\subsection{Background}
 %------------------------------------------------------------ 
 
 The \Rpackage{pageRank} package provides implementations of temporal PageRank as defined by [1], as well as multiplex PageRank as defined by [2]. As the extension of original steady-state PageRank [3,4] in temporal networks, temporal PageRank ranks nodes based on their connections that change over time. Multiplex PageRank, on the other hand, extends PageRank analysis to multiplex networks. In such networks, the same nodes might interact with one another in different layers. Multiplex PageRank is calculated according to the topology of a predefined base network, with regular PageRank of other supplemental networks as edge weights and personalization vector.
@@ -70,10 +74,15 @@ BiocManager::install("bcellViper")
 
 
 %------------------------------------------------------------
-\section{Temporal PageRank}
+\section{PageRank Analysis}
 %------------------------------------------------------------ 
 
-We applied \Rfunction{diff_graph()} to calculate temporal PageRank. This is a simplified version of temporal PageRank described by [1] by only analyzing temporally adjacent graph pairs.
+%------------------------------------------------------------
+\subsection{Temporal PageRank}
+%------------------------------------------------------------ 
+
+We applied \Rfunction{diff\_graph()} to calculate temporal PageRank. This is a simplified version of temporal PageRank described by [1] by only analyzing temporally adjacent graph pairs.
+
 
 <<tPR>>=
 library(pageRank)
@@ -88,11 +97,15 @@ igraph::V(graph2)$name <- 1:100
 diff_graph(graph1, graph2)
 @
 
+\noindent
+Differential graph graph1-graph2 will be outputed. The Differential graph has "moi (mode of interaction, 1 and -1 for interactions gained and losed in graph1, respectively)" as edge attribute. The Differential graph has "pagerank" and "name" as vertex attributes.
+
 %------------------------------------------------------------
-\section{Multiplex PageRank}
+\subsection{Multiplex PageRank}
 %------------------------------------------------------------ 
 
-We applied \Rfunction{multiplex_page_rank()} to calculate multiplex PageRank following defination by [2].
+We applied \Rfunction{multiplex\_page\_rank()} to calculate multiplex PageRank following defination by [2].
+
 
 <<mPR>>=
 library(pageRank)
@@ -109,11 +122,15 @@ igraph::V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
 multiplex_page_rank(graph1, graph2)
 @
 
+\noindent
+Multiplex PageRank values corresponded to nodes in graph1 (base network) will be outputed.
+
 %------------------------------------------------------------
-\section{Adjusting PageRank Calculations}
+\subsection{Adjusting PageRank Calculations}
 %------------------------------------------------------------ 
 
-The \Rfunction{clean_graph()} can remove nodes by residing subgraph sizes, vertex names and PageRank values. We thus can adjust graphs for PageRank calculation.
+The \Rfunction{clean\_graph()} can remove nodes by residing subgraph sizes, vertex names and PageRank values. We thus can adjust graphs for PageRank calculation.
+
 
 <<clean_graph>>=
 library(pageRank)
@@ -125,7 +142,13 @@ igraph::V(graph)$pagerank <- igraph::page_rank(graph)$vector
 clean_graph(graph, size=5)
 @
 
-The \Rfunction{adjust_graph()} can re-calculate PageRank with updated damping factor, personalized vector and edge weights.
+\noindent
+Adjusted graph will be outputed, with "pagerank" and "name" as vertex attributes.
+
+
+\noindent
+The \Rfunction{adjust\_graph()} can re-calculate PageRank with updated damping factor, personalized vector and edge weights.
+
 
 <<adjust_graph>>=
 library(pageRank)
@@ -137,13 +160,23 @@ igraph::V(graph)$pagerank <- igraph::page_rank(graph, damping=0.85)$vector
 adjust_graph(graph, damping=0.1)
 @
 
-Please note \Rfunction{diff_graph()}, \Rfunction{multiplex_page_rank()}, \Rfunction{clean_graph()} and \Rfunction{adjust_graph()} can be used in combination for customized PageRank analysis tasks.
+\noindent
+Adjusted graph will be outputed, with updated "pagerank" and "name" as vertex attributes.
+
+
+\noindent
+Please note \Rfunction{diff\_graph()}, \Rfunction{multiplex\_page\_rank()}, \Rfunction{clean\_graph()} and \Rfunction{adjust\_graph()} can be used in combination for customized PageRank analysis tasks.
 
 %------------------------------------------------------------
-\section{Generating GRNs from Multi-Omics Profiles}
+\section{Prioritizing TFs in GRNs}
 %------------------------------------------------------------ 
 
-The \Rfunction{aracne_network()} can re-format ARACNe network in regulon object for PageRank analysis. It can also handle GRNs reverse engineered using other algorithms, as long as such GRNs are written in regulon object.
+%------------------------------------------------------------
+\subsection{Generating GRNs from Multi-Omics Profiles}
+%------------------------------------------------------------ 
+
+The \Rfunction{aracne\_network()} can re-format ARACNe network in regulon object for PageRank analysis. It can also handle GRNs reverse engineered using other algorithms, as long as such GRNs are written in regulon object.
+
 
 <<aracne_network>>=
 library(bcellViper)
@@ -152,7 +185,9 @@ data(bcellViper)
 aracne_network(regulon[1:10])
 @
 
-The \Rfunction{accessibility_network()} can build network from accessibility, e.g. ATAC-Seq peaks.
+\noindent
+The \Rfunction{accessibility\_network()} can build network from accessibility, e.g. ATAC-Seq peaks.
+
 
 <<accessibility_network>>=
 library(pageRank)
@@ -183,7 +218,9 @@ library(BSgenome.Hsapiens.UCSC.hg19)
 accessibility_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
 @
 
+\noindent
 The \Rfunction{conformation_network()} can build network from conformation, e.g. HiChIP records.
+
 
 <<conformation_network>>=
 table <- data.frame(Chr1=c("chr1", "chr1"), Position1=c(569265, 713603), Strand1=c("+", "+"),
@@ -215,10 +252,11 @@ conformation_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
 @
 
 %------------------------------------------------------------
-\section{Filter GRNs with Expression Profiles}
+\subsection{Filter GRNs with Expression Profiles}
 %------------------------------------------------------------ 
 
-The \Rfunction{P_graph()} can filter GRNs by quantifying joint and margin probability distributions of regulator-target pairs. Statistically significant non-random regulator-target pairs will be kept.
+The \Rfunction{P\_graph()} can filter GRNs by quantifying joint and margin probability distributions of regulator-target pairs. Statistically significant non-random regulator-target pairs will be kept.
+
 
 <<P_graph>>=
 library(pageRank)
@@ -229,18 +267,25 @@ net <- do.call(rbind, lapply(1:10, function(i, regulon){
   data.frame(reg=rep(names(regulon)[i], 10),
              target=names(regulon[[i]][[1]])[1:10],
              stringsAsFactors = FALSE)}, regulon=regulon))
-P_graph(dset, net, null=NULL, threshold=0.05)
+P_graph(dset, net, method="difference", null=NULL, threshold=0.05)
 @
 
 \clearpage
 
-\end{document}
-
 %------------------------------------------------------------
-\subsection{References}
+\section{References}
 %------------------------------------------------------------ 
 
+\noindent
 1. Rozenshtein, Polina, and Aristides Gionis. "Temporal pagerank." Joint European Conference on Machine Learning and Knowledge Discovery in Databases. Springer, Cham, 2016.
+
+\noindent
 2. Halu, Arda, et al. "Multiplex pagerank." PloS one 8.10 (2013).
+
+\noindent
 3. Brin, Sergey, and Lawrence Page. "The anatomy of a large-scale hypertextual web search engine." (1998).
+
+\noindent
 4. Page, Lawrence, et al. The pagerank citation ranking: Bringing order to the web. Stanford InfoLab, 1999.
+
+\end{document}
