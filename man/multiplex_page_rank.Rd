@@ -7,7 +7,7 @@
 multiplex_page_rank(graph, ..., beta = 1, gamma = 1, damping = 0.85)
 }
 \arguments{
-\item{graph}{(igraph) The base graph with pagerank and name as vertex attributes}
+\item{graph}{(igraph) The base graph with pagerank and name as vertex attributes.}
 
 \item{...}{(igraph) Supporter graphs with pagerank and name as vertex attributes.}
 
@@ -37,12 +37,12 @@ Calculate multiplex PageRank following defination by Halu et al.
 library(igraph)
 set.seed(1)
 graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph1)$name <- 1:100
-V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
+igraph::V(graph1)$name <- 1:100
+igraph::V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
 set.seed(2)
 graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph2)$name <- 1:100
-V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
+igraph::V(graph2)$name <- 1:100
+igraph::V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
 multiplex_page_rank(graph1, graph2)
 
 }

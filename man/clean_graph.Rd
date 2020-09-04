@@ -25,8 +25,8 @@ Remove graph nodes by residing subgraph sizes, vertex names and PageRank values.
 library(igraph)
 set.seed(1)
 graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
-V(graph)$name <- 1:100
-V(graph)$pagerank <- igraph::page_rank(graph)$vector
+igraph::V(graph)$name <- 1:100
+igraph::V(graph)$pagerank <- igraph::page_rank(graph)$vector
 clean_graph(graph, size=5)
 }
 \author{
