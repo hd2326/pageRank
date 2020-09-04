@@ -1,0 +1,241 @@
+%\VignetteIndexEntry{pageRank}
+%\VignetteKeywords{Analyzing Gene Regulatory Networks with Temporal and multiplex PageRank}
+%\VignettePackage{pageRank}
+
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+
+\textwidth=6.2in
+\textheight=8.5in
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{\textit{#1}}
+\newcommand{\Rpackage}[1]{\textit{#1}}
+\newcommand{\Rexpression}[1]{\texttt{#1}}
+\newcommand{\Rmethod}[1]{{\texttt{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+
+\title{Introduction to pageRank package}
+\author{Hongxu Ding\\Department of Biomolecular Engineering and Genomics Institute, UCSC, Santa Cruz, CA, USA}
+\date{\today}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\maketitle
+\tableofcontents
+
+%------------------------------------------------------------
+\section{Introduction}
+%------------------------------------------------------------ 
+
+The \Rpackage{pageRank} package provides implementations of temporal PageRank as defined by [1], as well as multiplex PageRank as defined by [2]. As the extension of original steady-state PageRank [3,4] in temporal networks, temporal PageRank ranks nodes based on their connections that change over time. Multiplex PageRank, on the other hand, extends PageRank analysis to multiplex networks. In such networks, the same nodes might interact with one another in different layers. Multiplex PageRank is calculated according to the topology of a predefined base network, with regular PageRank of other supplemental networks as edge weights and personalization vector.
+
+PageRank-related approaches can be applied to prioritize key transcriptional factors (TFs) in gene regulatory networks (GRNs). Specifically, the \Rpackage{pageRank} package provides functions for generating temporal GRNs from corresponding static counterparts. The \Rpackage{pageRank} package also provides functions for converting multi-omics, e.g. gene expression, chromatin accessibility and chromosome conformation profiles to multiplex GRNs. Such temporal and multiplex GRNs can thus be  used for temporal and multiplex PageRank-based TF prioritization, respectively.
+
+%------------------------------------------------------------
+\subsection{Installation}
+%------------------------------------------------------------ 
+
+\Rpackage{pageRank} requires the R version 4.0 or later, packages \Rpackage{BSgenome.Hsapiens.UCSC.hg19}, \Rpackage{TxDb.Hsapiens.UCSC.hg19.knownGene}, \Rpackage{org.Hs.eg.db}, \Rpackage{annotate}, \Rpackage{GenomicFeatures}, \Rpackage{JASPAR2018}, \Rpackage{TFBSTools} and \Rpackage{bcellViper}, to run the examples. After installing R, all required components can be obtained with:
+
+\begin{verbatim}
+if (!requireNamespace("BiocManager", quietly=TRUE)) install.packages("BiocManager")
+BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")
+BiocManager::install("TxDb.Hsapiens.UCSC.hg19.knownGene")
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("annotate")
+BiocManager::install("GenomicFeatures")
+BiocManager::install("JASPAR2018")
+BiocManager::install("TFBSTools")
+BiocManager::install("bcellViper")
+\end{verbatim}
+
+%------------------------------------------------------------
+\subsection{Citation}
+%------------------------------------------------------------ 
+
+
+
+%------------------------------------------------------------
+\section{Temporal PageRank}
+%------------------------------------------------------------ 
+
+We applied \Rfunction{diff_graph()} to calculate temporal PageRank. This is a simplified version of temporal PageRank described by [1] by only analyzing temporally adjacent graph pairs.
+
+<<tPR>>=
+library(igraph)
+set.seed(1)
+graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
+V(graph1)$name <- 1:100
+#the 1st graph with name as vertex attributes
+set.seed(2)
+graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
+V(graph2)$name <- 1:100
+#the 2nd graph with name as vertex attributes
+diff_graph(graph1, graph2)
+@
+
+%------------------------------------------------------------
+\section{Multiplex PageRank}
+%------------------------------------------------------------ 
+
+We applied \Rfunction{multiplex_page_rank()} to calculate multiplex PageRank following defination by [2].
+
+<<mPR>>=
+library(igraph)
+set.seed(1)
+graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
+V(graph1)$name <- 1:100
+V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
+#the base graph with pagerank and name as vertex attributes.
+set.seed(2)
+graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
+V(graph2)$name <- 1:100
+V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
+#the supplemental graph with pagerank and name as vertex attributes.
+multiplex_page_rank(graph1, graph2)
+@
+
+%------------------------------------------------------------
+\section{Adjusting PageRank Calculations}
+%------------------------------------------------------------ 
+
+The \Rfunction{clean_graph()} can remove nodes by residing subgraph sizes, vertex names and PageRank values. We thus can adjust graphs for PageRank calculation.
+
+<<clean_graph>>=
+library(igraph)
+set.seed(1)
+graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
+V(graph)$name <- 1:100
+V(graph)$pagerank <- igraph::page_rank(graph)$vector
+#the graph to be cleaned, with pagerank and name as vertex attributes.
+clean_graph(graph, size=5)
+@
+
+The \Rfunction{adjust_graph()} can re-calculate PageRank with updated damping factor, personalized vector and edge weights.
+
+<<adjust_graph>>=
+library(igraph)
+set.seed(1)
+graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
+V(graph)$name <- 1:100
+V(graph)$pagerank <- igraph::page_rank(graph, damping=0.85)$vector
+#the graph to be adjusted, with pagerank and name as vertex attributes.
+adjust_graph(graph, damping=0.1)
+@
+
+Please note \Rfunction{diff_graph()}, \Rfunction{multiplex_page_rank()}, \Rfunction{clean_graph()} and \Rfunction{adjust_graph()} can be used in combination for customized PageRank analysis tasks.
+
+%------------------------------------------------------------
+\section{Generating GRNs from Multi-Omics Profiles}
+%------------------------------------------------------------ 
+
+The \Rfunction{aracne_network()} can re-format ARACNe network in regulon object for PageRank analysis. It can also handle GRNs reverse engineered using other algorithms, as long as such GRNs are written in regulon object.
+
+<<aracne_network>>=
+library(bcellViper)
+data(bcellViper)
+aracne_network(regulon[1:10])
+@
+
+The \Rfunction{accessibility_network()} can build network from accessibility, e.g. ATAC-Seq peaks.
+
+<<accessibility_network>>=
+table <- data.frame(Chr=c("chr1", "chr1"), Start=c(713689, 856337), End=c(714685, 862152),
+                    row.names=c("A", "B"), stringsAsFactors=FALSE)
+regulators=c("FOXF2", "MZF1")
+#peaks and regulators to be analyzed
+
+library(GenomicRanges)
+library(GenomicFeatures)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+library(org.Hs.eg.db)
+library(annotate)
+promoter <- promoters(genes(TxDb.Hsapiens.UCSC.hg19.knownGene))
+names(promoter) <- getSYMBOL(names(promoter), data="org.Hs.eg")
+promoter <- promoter[!is.na(names(promoter))]
+#get promoter regions
+
+library(JASPAR2018)
+library(TFBSTools)
+library(motifmatchr)
+pfm <- getMatrixSet(JASPAR2018, list(species="Homo sapiens"))
+pfm <- pfm[unlist(lapply(pfm, function(x) x@name)) %in% regulators]
+#get regulator position frequency matrix (PFM) list
+
+library(BSgenome.Hsapiens.UCSC.hg19)
+accessibility_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
+@
+
+The \Rfunction{conformation_network()} can build network from conformation, e.g. HiChIP records.
+
+<<conformation_network>>=
+table <- data.frame(Chr1=c("chr1", "chr1"), Position1=c(569265, 713603), Strand1=c("+", "+"),
+                    Chr2=c("chr4", "chr1"), Position2=c(206628, 715110), Strand2=c("+", "-"),
+                    row.names=c("A", "B"), stringsAsFactors=FALSE)
+regulators=c("FOXF2", "MZF1")
+#peaks and regulators to be analyzed
+
+library(GenomicRanges)
+library(GenomicFeatures)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+library(org.Hs.eg.db)
+library(annotate)
+promoter <- promoters(genes(TxDb.Hsapiens.UCSC.hg19.knownGene))
+names(promoter) <- getSYMBOL(names(promoter), data="org.Hs.eg")
+promoter <- promoter[!is.na(names(promoter))]
+#get promoter regions
+
+library(JASPAR2018)
+library(TFBSTools)
+library(motifmatchr)
+pfm <- getMatrixSet(JASPAR2018, list(species="Homo sapiens"))
+pfm <- pfm[unlist(lapply(pfm, function(x) x@name)) %in% regulators]
+#get regulator position frequency matrix (PFM) list
+
+library(BSgenome.Hsapiens.UCSC.hg19)
+conformation_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
+@
+
+%------------------------------------------------------------
+\section{Filter GRNs with Expression Profiles}
+%------------------------------------------------------------ 
+
+The \Rfunction{P_graph()} can filter GRNs by quantifying joint and margin probability distributions of regulator-target pairs. Statistically significant non-random regulator-target pairs will be kept.
+
+<<P_graph>>=
+library(bcellViper)
+data(bcellViper)
+dset <- exprs(dset)
+net <- do.call(rbind, lapply(1:10, function(i, regulon){
+  data.frame(reg=rep(names(regulon)[i], 10),
+             target=names(regulon[[i]][[1]])[1:10],
+             stringsAsFactors = FALSE)}, regulon=regulon))
+P_graph(dset, net, null=NULL, threshold=0.05)
+@
+
+\clearpage
+
+\end{document}
+
+%------------------------------------------------------------
+\subsection{References}
+%------------------------------------------------------------ 
+
+1. Rozenshtein, Polina, and Aristides Gionis. "Temporal pagerank." Joint European Conference on Machine Learning and Knowledge Discovery in Databases. Springer, Cham, 2016.
+2. Halu, Arda, et al. "Multiplex pagerank." PloS one 8.10 (2013).
+3. Brin, Sergey, and Lawrence Page. "The anatomy of a large-scale hypertextual web search engine." (1998).
+4. Page, Lawrence, et al. The pagerank citation ranking: Bringing order to the web. Stanford InfoLab, 1999.

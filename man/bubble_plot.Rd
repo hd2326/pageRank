@@ -26,6 +26,9 @@ bubble_plot(
 
 \item{main}{(character) Title.}
 }
+\value{
+(NULL) A bubbloplot.
+}
 \description{
 Make bubbleplot.
 }

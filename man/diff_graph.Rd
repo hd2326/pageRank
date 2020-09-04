@@ -22,10 +22,10 @@ by only analyzing temporally adjacent graph pairs.
 \examples{
 library(igraph)
 set.seed(1)
-graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = T)
+graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph1)$name <- 1:100
 set.seed(2)
-graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = T)
+graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph2)$name <- 1:100
 diff_graph(graph1, graph2)
 

@@ -24,7 +24,7 @@ Re-calculate PageRank with updated damping factor, personalized vector and edge 
 \examples{
 library(igraph)
 set.seed(1)
-graph <- igraph::erdos.renyi.game(100, 0.01, directed = T)
+graph <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph)$name <- 1:100
 V(graph)$pagerank <- igraph::page_rank(graph, damping=0.85)$vector
 adjust_graph(graph, damping=0.1)

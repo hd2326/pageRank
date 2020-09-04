@@ -36,9 +36,10 @@ Build probability-based regulator-target interaction network.
 library(bcellViper)
 data(bcellViper)
 dset <- exprs(dset)
-net <- do.call(rbind, lapply(1:10, function(i, regulon) data.frame(reg=rep(names(regulon)[i], 10),
-                                                                   target=names(regulon[[i]][[1]])[1:10],
-                                                                   stringsAsFactors = F), regulon=regulon))
+net <- do.call(rbind, lapply(1:10, function(i, regulon){
+  data.frame(reg=rep(names(regulon)[i], 10),
+             target=names(regulon[[i]][[1]])[1:10],
+             stringsAsFactors = FALSE)}, regulon=regulon))
 P_graph(dset, net, null=NULL, threshold=0.05)
 
 }

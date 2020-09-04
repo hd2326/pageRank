@@ -12,6 +12,10 @@ get_color_gradient(
 }
 \arguments{
 \item{x}{(numeric) Vector based on which color gradient is generated.}
+
+\item{col}{(character) Color vector.}
+
+\item{breaks}{(numeric) A set of breakpoints for the colors. Must be the same length of col.}
 }
 \value{
 (character) Colors.

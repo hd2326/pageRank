@@ -11,14 +11,21 @@ multiplex_page_rank(graph, ..., beta = 1, gamma = 1, damping = 0.85)
 
 \item{...}{(igraph) Supporter graphs with pagerank and name as vertex attributes.}
 
-\item{damping}{(numeric) Damping factor.}
-
-\item{beta/gamma}{(numeric) Parameters for adjusting supporter graph PageRank values.
+\item{beta}{(numeric) Parameters for adjusting supporter graph PageRank values.
 For the same nodes, PageRank values from different supporter graphs will first be multiplicated.
 The products will then be exponentiate by beta and gamma,
 as outgoing edge weights and personalizations of the base graph.
 Four special multiplex PageRank forms are defined by varying (beta, gamma),
 including additive (0, 1), multiplicative (1, 0), combined (1, 1) and neutral (0, 0).}
+
+\item{gamma}{(numeric) Parameters for adjusting supporter graph PageRank values.
+For the same nodes, PageRank values from different supporter graphs will first be multiplicated.
+The products will then be exponentiate by beta and gamma,
+as outgoing edge weights and personalizations of the base graph.
+Four special multiplex PageRank forms are defined by varying (beta, gamma),
+including additive (0, 1), multiplicative (1, 0), combined (1, 1) and neutral (0, 0).}
+
+\item{damping}{(numeric) Damping factor.}
 }
 \value{
 (numeric) Multiplex PageRank values.
@@ -29,11 +36,11 @@ Calculate multiplex PageRank following defination by Halu et al.
 \examples{
 library(igraph)
 set.seed(1)
-graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = T)
+graph1 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph1)$name <- 1:100
 V(graph1)$pagerank <- igraph::page_rank(graph1)$vector
 set.seed(2)
-graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = T)
+graph2 <- igraph::erdos.renyi.game(100, 0.01, directed = TRUE)
 V(graph2)$name <- 1:100
 V(graph2)$pagerank <- igraph::page_rank(graph2)$vector
 multiplex_page_rank(graph1, graph2)
