@@ -53,7 +53,7 @@
 #'
 #' @export
 
-accessibility_network <- function(table, promoters, pfm, genome, p.cutoff=5e-05, w=7){
+accessibility_network <- function(table, promoter, pfm, genome, p.cutoff=5e-05, w=7){
   table <- makeGRangesFromDataFrame(table)
   #convert peak table to GRanges
   target <- as.data.frame(findOverlaps(table, promoter))

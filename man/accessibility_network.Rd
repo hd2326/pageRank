@@ -4,10 +4,12 @@
 \alias{accessibility_network}
 \title{Build Network from Accessibility Peaks.}
 \usage{
-accessibility_network(table, promoters, pfm, genome, p.cutoff = 5e-05, w = 7)
+accessibility_network(table, promoter, pfm, genome, p.cutoff = 5e-05, w = 7)
 }
 \arguments{
 \item{table}{(data.frame) Peaks, with "Chr", "Start" and "End" in column name, and peak ID in row names.}
+
+\item{promoter}{(GRanges) Promoter regions.}
 
 \item{pfm}{(PFMatrixList) Positon Frequency Matrices (PFMs) of regulators.}
 
@@ -16,8 +18,6 @@ accessibility_network(table, promoters, pfm, genome, p.cutoff = 5e-05, w = 7)
 \item{p.cutoff}{(numeric) P-value cutoff for motifs searching within peaks for TF identificaton.}
 
 \item{w}{(numeric) Window size for motifs searching within peaks for TF identificaton.}
-
-\item{promoter}{(GRanges) Promoter regions.}
 }
 \value{
 (data.frame) Network, with "reg" and "target" in column name.

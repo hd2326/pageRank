@@ -30,8 +30,9 @@ dset <- exprs(dset)
 net <- do.call(rbind, lapply(1:10, function(i, regulon){
   data.frame(reg=rep(names(regulon)[i], 10),
              target=names(regulon[[i]][[1]])[1:10],
+             direction=rep(1, 10),
              stringsAsFactors = FALSE)}, regulon=regulon))
-P_null(dset, net, n=100)
+P_null(dset, net, n=100, method="difference")
 
 }
 \author{

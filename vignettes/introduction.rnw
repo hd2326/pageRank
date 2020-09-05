@@ -219,7 +219,7 @@ accessibility_network(table, promoter, pfm, "BSgenome.Hsapiens.UCSC.hg19")
 @
 
 \noindent
-The \Rfunction{conformation_network()} can build network from conformation, e.g. HiChIP records.
+The \Rfunction{conformation\_network()} can build network from conformation, e.g. HiChIP records.
 
 
 <<conformation_network>>=
