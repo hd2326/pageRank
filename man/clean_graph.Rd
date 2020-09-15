@@ -19,7 +19,8 @@ clean_graph(graph, size = NULL, vertices = NULL, pagerank = NULL)
 (igraph) Network updated "pagerank" as vertex attribute.
 }
 \description{
-Remove graph nodes by residing subgraph sizes, vertex names and PageRank values.
+Remove graph nodes by residing subgraph sizes, vertex names and PageRank
+values.
 }
 \examples{
 library(igraph)

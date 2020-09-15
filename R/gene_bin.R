@@ -11,9 +11,12 @@
 #' @return (matrix) Border values of gene expression bins.
 #'
 #' @author DING, HONGXU (hd2326@columbia.edu)
+#' 
+#' @keywords internal
 
 gene_bin <- function(genes, expmat, sep=5){
-  expmat <- expmat[intersect(genes, rownames(expmat)), ]
-  table <- t(apply(expmat, 1, function(x, sep) seq(min(x), max(x), length.out = (sep+1)), sep=sep))
-  colnames(table) <- paste("bin", seq_len(sep+1), sep = "_")
-  return(table)}
+    expmat <- expmat[intersect(genes, rownames(expmat)), ]
+    table <- t(apply(expmat, 1, function(x, sep){
+        seq(min(x), max(x), length.out = (sep+1))}, sep=sep))
+    colnames(table) <- paste("bin", seq_len(sep+1), sep = "_")
+    return(table)}

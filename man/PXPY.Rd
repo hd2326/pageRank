@@ -20,3 +20,4 @@ Calculate the product of marginal probability.
 \author{
 DING, HONGXU (hd2326@columbia.edu)
 }
+\keyword{internal}

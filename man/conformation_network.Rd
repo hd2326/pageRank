@@ -15,19 +15,24 @@ conformation_network(
 )
 }
 \arguments{
-\item{table}{(data.frame) Records, with "Chr1", "Position1", "Strand1", "Chr2", "Position2" and "Strand2" in column name, and record ID in row names.}
+\item{table}{(data.frame) Records, with "Chr1", "Position1", "Strand1",
+"Chr2", "Position2" and "Strand2" in column name, and record ID in row names.}
 
 \item{promoter}{(GRanges) Promoter regions.}
 
 \item{pfm}{(PFMatrixList) Positon Frequency Matrices (PFMs) of regulators.}
 
-\item{genome}{(BSgenome or character) Genome build in which regulator motifs will be searched.}
+\item{genome}{(BSgenome or character) Genome build in which regulator motifs
+will be searched.}
 
-\item{range}{(numeric) Search radius from "Position1" and "Position2" for promoters.}
+\item{range}{(numeric) Search radius from "Position1" and "Position2" for
+promoters.}
 
-\item{p.cutoff}{(numeric) P-value cutoff for motifs searching within peaks for TF identificaton.}
+\item{p.cutoff}{(numeric) P-value cutoff for motifs searching within peaks
+for TF identificaton.}
 
-\item{w}{(numeric) Window size for motifs searching within peaks for TF identificaton.}
+\item{w}{(numeric) Window size for motifs searching within peaks for TF
+identificaton.}
 }
 \value{
 (data.frame) Network, with "reg" and "target" in column name.
@@ -36,8 +41,12 @@ conformation_network(
 Build network from conformation, e.g. HiChIP records.
 }
 \examples{
-table <- data.frame(Chr1=c("chr1", "chr1"), Position1=c(569265, 713603), Strand1=c("+", "+"),
-                    Chr2=c("chr4", "chr1"), Position2=c(206628, 715110), Strand2=c("+", "-"),
+table <- data.frame(Chr1=c("chr1", "chr1"),
+                    Position1=c(569265, 713603),
+                    Strand1=c("+", "+"),
+                    Chr2=c("chr4", "chr1"),
+                    Position2=c(206628, 715110),
+                    Strand2=c("+", "-"),
                     row.names=c("A", "B"), stringsAsFactors=FALSE)
 regulators=c("FOXF2", "MZF1")
 #peaks and regulators to be analyzed
@@ -56,7 +65,7 @@ library(JASPAR2018)
 library(TFBSTools)
 library(motifmatchr)
 pfm <- getMatrixSet(JASPAR2018, list(species="Homo sapiens"))
-pfm <- pfm[unlist(lapply(pfm, function(x) x@name)) \%in\% regulators]
+pfm <- pfm[unlist(lapply(pfm, function(x) name(x))) \%in\% regulators]
 #get regulator position frequency matrix (PFM) list
 
 library(BSgenome.Hsapiens.UCSC.hg19)

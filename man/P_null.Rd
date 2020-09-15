@@ -13,15 +13,18 @@ P_null(expmat, net, n = 10000, sep = 5, method = c("difference", "mi"))
 
 \item{n}{(numeric) Number of random pairs.}
 
-\item{sep}{(numeric) Number of bins for calculating marginal/joint probability.}
+\item{sep}{(numeric) Number of bins for calculating marginal/joint
+probability.}
 
-\item{method}{(character) Method for calculating probability-based distance, either PXY-PXPY ("difference") or mutual information ("mi").}
+\item{method}{(character) Method for calculating probability-based distance,
+either PXY-PXPY ("difference") or mutual information ("mi").}
 }
 \value{
 (ecdf) ECDF of null distribution.
 }
 \description{
-Build null model for evaluating the significance of interactions by generating random regulator-target pairs.
+Build null model for evaluating the significance of interactions by
+generating random regulator-target pairs.
 }
 \examples{
 library(bcellViper)

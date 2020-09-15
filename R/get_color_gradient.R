@@ -6,7 +6,8 @@
 #' 
 #' @param col (character) Color vector.
 #' 
-#' @param breaks (numeric) A set of breakpoints for the colors. Must be the same length of col.
+#' @param breaks (numeric) A set of breakpoints for the colors. Must be the same
+#' length of col.
 #' 
 #' @return (character) Colors.
 #'
@@ -19,8 +20,12 @@
 #'
 #' @export
 
-get_color_gradient <- function (x, col=colorRampPalette(c("Blue", "Grey", "Red"))(100), breaks=seq(-2, 2, length.out=100)){
-  color <- NULL
-  if (length(col)  == length(breaks)) color <- col[unlist(lapply(x, function(xx, breaks) which.min(abs(xx - breaks)), breaks = breaks))]
-  else message("col and breaks should be the same length")
-  return(color)}
+get_color_gradient <- function (x,
+                                col=colorRampPalette(c("Blue", "Red"))(100),
+                                breaks=seq(-2, 2, length.out=100)){
+    color <- NULL
+    if (length(col)  == length(breaks))
+        color <- col[unlist(lapply(x, function(xx, breaks){
+            which.min(abs(xx - breaks))}, breaks = breaks))]
+    else message("col and breaks should be the same length")
+    return(color)}

@@ -12,12 +12,13 @@ diff_graph(graph1, graph2)
 \item{graph2}{(igraph) The 2nd graph.}
 }
 \value{
-(igraph) Network graph1-graph2 with "moi (mode of interaction)" and "pagerank" as edge and vertex attributes.
+(igraph) Network graph1-graph2 with "moi (mode of interaction)" and
+"pagerank" as edge and vertex attributes.
 }
 \description{
 Calculate temporal PageRank by changing edges between graph1 and graph2.
-This is a simplified version of temporal PageRank described by Rozenshtein and Gionis,
-by only analyzing temporally adjacent graph pairs.
+This is a simplified version of temporal PageRank described by Rozenshtein
+and Gionis, by only analyzing temporally adjacent graph pairs.
 }
 \examples{
 library(igraph)
@@ -31,7 +32,9 @@ diff_graph(graph1, graph2)
 
 }
 \references{
-Rozenshtein, Polina, and Aristides Gionis. "Temporal pagerank." Joint European Conference on Machine Learning and Knowledge Discovery in Databases. Springer, Cham, 2016.
+Rozenshtein, Polina, and Aristides Gionis. "Temporal pagerank."
+Joint European Conference on Machine Learning and Knowledge Discovery in
+Databases. Springer, Cham, 2016.
 }
 \author{
 DING, HONGXU (hd2326@columbia.edu)

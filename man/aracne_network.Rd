@@ -10,10 +10,12 @@ aracne_network(regulon)
 \item{regulon}{(regulon) ARACNe network.}
 }
 \value{
-(data.frame) Network, with "reg", "target" and "direction" in column name. For direction, 1/0 denotes positive/negative regulation.
+(data.frame) Network, with "reg", "target" and "direction" in column
+name. For direction, 1/0 denotes positive/negative regulation.
 }
 \description{
-Re-format ARACNe network in regulon object to data.frame with regulator, target and direction columns.
+Re-format ARACNe network in regulon object to data.frame with regulator,
+target and direction columns.
 }
 \examples{
 library(bcellViper)

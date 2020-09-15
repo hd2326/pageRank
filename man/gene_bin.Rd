@@ -22,3 +22,4 @@ Bin gene expression space for marginal/joint probability calculation.
 \author{
 DING, HONGXU (hd2326@columbia.edu)
 }
+\keyword{internal}

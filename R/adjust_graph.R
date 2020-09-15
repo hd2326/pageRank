@@ -1,6 +1,7 @@
 #' Re-calculate PageRank
 #'
-#' Re-calculate PageRank with updated damping factor, personalized vector and edge weights.
+#' Re-calculate PageRank with updated damping factor, personalized vector and
+#' edge weights.
 #'
 #' @param graph (igraph) The graph to be adjusted.
 #'
@@ -28,6 +29,7 @@
 #' @export
 
 adjust_graph <- function(graph, damping=0.85, personalized=NULL, weights=NULL){
-  pagerank <- page_rank(graph, damping=damping, personalized=personalized, weights=weights)$vector
-  graph <- set_vertex_attr(graph=graph, name="pagerank", value=pagerank)
-  return(graph)}
+    pagerank <- page_rank(graph, damping=damping, personalized=personalized,
+                          weights=weights)$vector
+    graph <- set_vertex_attr(graph=graph, name="pagerank", value=pagerank)
+    return(graph)}

@@ -18,6 +18,8 @@
 #' @export
 
 time_expmat <- function(time, expmat){
-  table <- lapply(unique(time), function(t, time, expmat) rowMeans(expmat[, time == t]), time=time, expmat=expmat)
-  table <- structure(do.call(cbind, table), dimnames=list(rownames(expmat), unique(time)))
-  return(table)}
+    table <- lapply(unique(time), function(t, time, expmat)
+        rowMeans(expmat[, time == t]), time=time, expmat=expmat)
+    table <- structure(do.call(cbind, table),
+                       dimnames=list(rownames(expmat), unique(time)))
+    return(table)}

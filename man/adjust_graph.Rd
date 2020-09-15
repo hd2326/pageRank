@@ -19,7 +19,8 @@ adjust_graph(graph, damping = 0.85, personalized = NULL, weights = NULL)
 (igraph) Network with updated "pagerank" as vertex attribute.
 }
 \description{
-Re-calculate PageRank with updated damping factor, personalized vector and edge weights.
+Re-calculate PageRank with updated damping factor, personalized vector and
+edge weights.
 }
 \examples{
 library(igraph)

@@ -6,7 +6,7 @@
 \usage{
 get_color_gradient(
   x,
-  col = colorRampPalette(c("Blue", "Grey", "Red"))(100),
+  col = colorRampPalette(c("Blue", "Red"))(100),
   breaks = seq(-2, 2, length.out = 100)
 )
 }
@@ -15,7 +15,8 @@ get_color_gradient(
 
 \item{col}{(character) Color vector.}
 
-\item{breaks}{(numeric) A set of breakpoints for the colors. Must be the same length of col.}
+\item{breaks}{(numeric) A set of breakpoints for the colors. Must be the same
+length of col.}
 }
 \value{
 (character) Colors.

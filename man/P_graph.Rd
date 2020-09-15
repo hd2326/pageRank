@@ -18,16 +18,21 @@ P_graph(
 
 \item{net}{(data.frame) Network, with "reg" and "target" in column name.}
 
-\item{sep}{(numeric) Number of bins for calculating marginal/joint probability.}
+\item{sep}{(numeric) Number of bins for calculating marginal/joint
+probability.}
 
-\item{method}{(character) Method for calculating probability-based distance, either PXY-PXPY ("difference") or mutual information ("mi").}
+\item{method}{(character) Method for calculating probability-based distance,
+either PXY-PXPY ("difference") or mutual information ("mi").}
 
-\item{null}{(ecdf) Null distribution of probability-based distance. Either from random interactions by P_null function, or all interactions in net.}
+\item{null}{(ecdf) Null distribution of probability-based distance. Either
+from random interactions by P_null function, or all interactions in net.}
 
-\item{threshold}{(numeric) P-value threshold for filtering interactions in net.}
+\item{threshold}{(numeric) P-value threshold for filtering interactions in
+net.}
 }
 \value{
-(igraph) Network graph with "pvalue" and "direction", and "pagerank" as edge/vertex attributes.
+(igraph) Network graph with "pvalue" and "direction", and "pagerank"
+as edge/vertex attributes.
 }
 \description{
 Build probability-based regulator-target interaction network.

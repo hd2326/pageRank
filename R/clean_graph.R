@@ -1,6 +1,7 @@
 #' Clean Graph
 #'
-#' Remove graph nodes by residing subgraph sizes, vertex names and PageRank values.
+#' Remove graph nodes by residing subgraph sizes, vertex names and PageRank
+#' values.
 #'
 #' @param graph (igraph) The graph to be cleaned.
 #'
@@ -31,13 +32,14 @@
 #' @export
 
 clean_graph <- function(graph, size=NULL, vertices=NULL, pagerank=NULL){
-  v <- v1 <- v2 <- names(V(graph))
-  if (!is.null(vertices)) v1 <- intersect(v, vertices)
-  if (!is.null(pagerank)) v2 <- v[V(graph)$pagerank >= pagerank]
-  graph <- delete_vertices(graph, setdiff(v, intersect(v1, v2)))
-  if (!is.null(size)){
-    cluster <- igraph::clusters(graph)
-    v <- names(V(graph))[cluster$membership %in% which(cluster$csize < size)]
-    graph <- delete_vertices(graph, v)}
-  graph <- set_vertex_attr(graph=graph, name="pagerank", value=page_rank(graph)$vector)
-  return(graph)}
+    v <- v1 <- v2 <- names(V(graph))
+    if (!is.null(vertices)) v1 <- intersect(v, vertices)
+    if (!is.null(pagerank)) v2 <- v[V(graph)$pagerank >= pagerank]
+    graph <- delete_vertices(graph, setdiff(v, intersect(v1, v2)))
+    if (!is.null(size)){
+        cluster <- igraph::clusters(graph)
+        v <- names(V(graph))[cluster$membership%in%which(cluster$csize < size)]
+        graph <- delete_vertices(graph, v)}
+    graph <- set_vertex_attr(graph=graph, name="pagerank",
+                             value=page_rank(graph)$vector)
+    return(graph)}
