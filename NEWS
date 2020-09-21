@@ -1,1 +1,2 @@
-* version 1.0.0 - Initial release. Implemented temporal and multiplex PageRank functions, as well as corresponding applications in gene regulatory network analysis.
+Changes in version 0.99.0 (2020-09-21)
++ Submitted to Bioconductor
